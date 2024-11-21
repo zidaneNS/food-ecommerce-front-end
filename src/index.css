@@ -1,0 +1,26 @@
+.navbar {
+    background-color: #ffa500;
+}
+
+.navbar .logo {
+    font-weight: bold;
+    color: white;
+}
+
+.navbar .nav-comp {
+    color: whitesmoke;
+    font-weight: 600;
+    text-decoration: inherit;
+}
+
+.navbar .nav-comp:hover {
+    color: inherit;
+}
+
+.login-form {
+    margin-top: 80px;
+}
+
+.error {
+    background-color: #ffbcbc;
+}
