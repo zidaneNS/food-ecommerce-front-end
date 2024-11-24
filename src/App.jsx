@@ -29,8 +29,6 @@ const App = () => {
     }
     if (updated) {
       getFoods();
-      console.log('foods', foods);
-      console.log('notes', notes);
       setUpdated(false)
     }
   }, [updated])

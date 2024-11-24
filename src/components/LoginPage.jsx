@@ -2,6 +2,7 @@ import Button from 'react-bootstrap/Button';
 import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
+import Spinner from 'react-bootstrap/Spinner';
 import { useContext, useState, useEffect } from 'react';
 import axios from '../api/axios';
 import AuthContext from '../context/AuthContext';
@@ -15,6 +16,7 @@ const LoginPage = () => {
 
     const [isSignUp, setIsSignUp] = useState(false);
     const [isAdmin, setIsAdmin] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
 
     useEffect(() => {
         setErrMsg('');
@@ -27,20 +29,18 @@ const LoginPage = () => {
             return
         }
         try {
+            setIsLoading(true);
             const response = isSignUp ? await axios.post('/register', isAdmin ? JSON.stringify({ name: user, roles: { admin: 2002 }, password: pwd }) : JSON.stringify({ name: user, password: pwd }), {
                 headers: { 'Content-type': 'application/json' }
             }) : await axios.post('/auth', JSON.stringify({ name: user, password: pwd }), {
                 headers: { 'Content-Type': 'application/json' }
             });
-
-            console.log(response.data);
             const roles = response.data.data.roles;
             !isSignUp && setAuth({ user, roles });
             isSignUp && setIsSignUp(prev => !prev);
             setUser('');
             setPwd('');
             setMatch('');
- 
         } catch (err) {
             if (!err?.response) {
                 setErrMsg('No Server Response');
@@ -53,6 +53,8 @@ const LoginPage = () => {
             } else {
                 setErrMsg('Login failed');
             }
+        } finally {
+            setIsLoading(false);
         }
     }
 
@@ -71,6 +73,7 @@ const LoginPage = () => {
                     onChange={(e) => setUser(e.target.value)}
                     value={user}
                     autoComplete='off'
+                    autoFocus
                 />
                 </Form.Group>
             </Row>
@@ -118,14 +121,18 @@ const LoginPage = () => {
                     checked={isAdmin}
                 />  
                 )}
-                <Button 
-                    variant="warning" 
-                    type="submit"
-                    onClick={(e) => handleSubmit(e)}
-                    disabled={(user === '' && pwd === '' && match === '')}
-                >
-                    Submit
-                </Button>
+                {isLoading ? (
+                    <Spinner animation='border' variant='warning' />
+                ) : (
+                    <Button 
+                        variant="warning" 
+                        type="submit"
+                        onClick={(e) => handleSubmit(e)}
+                        disabled={(user === '' && pwd === '' && match === '')}
+                    >
+                        Submit
+                    </Button>
+                )}
             </Row>
             </Form>
         </Col>
