@@ -1,6 +1,6 @@
 import { createRoot } from 'react-dom/client'
 import { BrowserRouter } from 'react-router-dom'
-import { AuthProvider } from './context/authContext.jsx'
+import { AuthProvider } from './context/AuthContext.jsx'
 import { disableReactDevTools } from '@fvilers/disable-react-devtools'
 import './index.css'
 import App from './App.jsx'
