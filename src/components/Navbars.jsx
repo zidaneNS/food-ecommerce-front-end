@@ -1,35 +1,27 @@
-import Button from 'react-bootstrap/Button';
-import Container from 'react-bootstrap/Container';
-import Form from 'react-bootstrap/Form';
-import Nav from 'react-bootstrap/Nav';
-import Navbar from 'react-bootstrap/Navbar';
 import useAuth from '../hooks/useAuth';
 import { Link } from 'react-router-dom';
 
 const Navbars = () => {
   const { auth, setAuth } = useAuth();
   return (
-    <Navbar expand="lg" className='navbar' fixed='top'>
-      <Container fluid>
-        <Navbar.Brand className='logo' ><Link className='nav-comp' to="/">Makan Sehat</Link></Navbar.Brand>
-        <Navbar.Toggle aria-controls="navbarScroll" />
-        <Navbar.Collapse id="navbarScroll">
-          <Nav
-            className="me-auto my-2 my-lg-0"
-            style={{ maxHeight: '100px' }}
-            navbarScroll
-          >
-            {auth.roles?.admin && (
-            <Nav.Link><Link className='nav-comp' to="/dashboard">Dashboard</Link></Nav.Link>
-            )}
-          </Nav>
-          <Form className="d-flex">
-            <Navbar.Brand>{auth.user}</Navbar.Brand>
-            <Button variant="primary" onClick={() => setAuth({})}>Logout</Button>
-          </Form>
-        </Navbar.Collapse>
-      </Container>
-    </Navbar>
+    <div className="fixed top-0 w-screen grid  grid-flow-col flex-1 justify-around px-4 py-2 dark:bg-purple-900 bg-purple-600 text-slate-300 text-2xl">
+      <div className="font-bold col-span-2 flex items-center">
+        Makan Sehat
+      </div>
+      <div className="grid gap-6 place-content-center grid-flow-col m-0 h-max p-0 col-span-1">
+        <Link className="text-base cursor-pointer hover:bg-purple-700 dark:hover:bg-purple-950 text-inherit p-2" style={{textDecoration: 'none'}} >Home</Link>
+        {auth.roles?.admin && (
+        <Link className="text-base cursor-pointer hover:bg-purple-700 dark:hover:bg-purple-950 text-inherit p-2" style={{textDecoration: 'none'}} >Dashboard</Link>
+        )}
+        <Link className="text-base cursor-pointer hover:bg-purple-700 dark:hover:bg-purple-950 text-inherit p-2" style={{textDecoration: 'none'}} >Sign In</Link>
+      </div>
+      {auth.user && (
+      <div className="grid place-content-center grid-flow-col gap-6 text-base col-span-1">
+        <p className="flex m-0 items-center">{auth.user}</p>
+        <button className="bg-blue-600 text-white p-2 rounded hover:bg-blue-700" onClick={() => setAuth({})}>Logout</button>
+      </div>
+      )}
+    </div>
   )
 }
 
