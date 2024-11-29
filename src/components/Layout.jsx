@@ -3,7 +3,7 @@ import Navbars from "./Navbars"
 
 const Layout = () => {
   return (
-    <div className="App">
+    <div className="App bg-slate-200 dark:bg-slate-900">
         <Navbars />
         <Outlet />
     </div>
