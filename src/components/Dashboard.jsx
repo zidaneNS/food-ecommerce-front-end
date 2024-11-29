@@ -128,7 +128,7 @@ const Dashboard = ({ foods, setUpdated, notes }) => {
                                 ))}
                                 <ListGroup vertical className="mb-4">
                                     <ListGroup.Item>
-                                        Hasil enkripsi:
+                                        des text:
                                         <br />
                                         {note.des_text}
                                     </ListGroup.Item>

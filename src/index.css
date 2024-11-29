@@ -1,18 +1,30 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
-
-body {
-    display: flex;
-    height: 100vh;
+.navbar {
+    background-color: #ffa500;
 }
 
-#root {
-    flex-grow: 1;
-    display: flex;
+.navbar .logo {
+    font-weight: bold;
+    color: white;
 }
 
-.App {
-    flex-direction: column;
-    flex-grow: 1;
+.navbar .nav-comp {
+    color: whitesmoke;
+    font-weight: 600;
+    text-decoration: inherit;
+}
+
+.navbar .nav-comp:hover {
+    color: inherit;
+}
+
+.login-form {
+    margin-top: 80px;
+}
+
+.error {
+    background-color: #ffbcbc;
+}
+
+th {
+    border: 1px solid black;
 }

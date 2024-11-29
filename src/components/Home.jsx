@@ -7,6 +7,7 @@ import Card from 'react-bootstrap/Card';
 import Spinner from 'react-bootstrap/Spinner';
 import Modal from 'react-bootstrap/Modal';
 import useAuth from '../hooks/useAuth';
+import LoginPage from './LoginPage';
 import { useState, useEffect } from 'react';
 import axios from '../api/axios';
 
@@ -78,8 +79,10 @@ const Home = ({ foods, setUpdated }) => {
     setNote({});
   }
   return (
-    <div className="grid grid-flow-row place-content-center h-screen">
-      {/* {note?.orderInfo?.order && (
+    <Container>
+      {auth.user ? (
+      <>
+      {note?.orderInfo?.order && (
       <Modal dialogClassName='modal-70w' show={noteDisplay}>
         <Modal.Header >
           <Modal.Title>Note {note.date}</Modal.Title>
@@ -98,26 +101,9 @@ const Home = ({ foods, setUpdated }) => {
           <Button variant='danger' onClick={handleCloseNote} className='me-3'>Close</Button>
         </Modal.Body>
       </Modal>
-      )} */}
-      <h1 className="text-purple-600 dark:text-purple-500 text-6xl row-span-1">Pilih Pesanan Anda</h1>
-      <section className="row-span-1 col-span-3 grid grid-flow-col gap-10">
-        <div className="bg-slate-200 border border-slate-400 dark:bg-slate-900 dark:border-slate-200 rounded min-h-40 flex flex-col p-2 w-auto h-fit">
-            <div className="font-bold text-slate-700 dark:text-slate-200 text-2xl border-b-2">Nama</div>
-            <div className="text-slate-500 dark:text-slate-400 text-sm">Rp10000</div>
-            <div className="text-slate-700 dark:text-slate-200 text-xl">Lorem, ipsum dolor.</div>
-        </div>
-        <div className="bg-slate-200 border border-slate-400 dark:bg-slate-900 dark:border-slate-200 rounded min-h-40 flex flex-col p-2 w-auto h-fit">
-            <div className="font-bold text-slate-700 dark:text-slate-200 text-2xl border-b-2">Nama</div>
-            <div className="text-slate-500 dark:text-slate-400 text-sm">Rp10000</div>
-            <div className="text-slate-700 dark:text-slate-200 text-xl">Lorem, ipsum dolor.</div>
-        </div>
-        <div className="bg-slate-200 border border-slate-400 dark:bg-slate-900 dark:border-slate-200 rounded min-h-40 flex flex-col p-2 w-auto h-fit">
-            <div className="font-bold text-slate-700 dark:text-slate-200 text-2xl border-b-2">Nama</div>
-            <div className="text-slate-500 dark:text-slate-400 text-sm">Rp10000</div>
-            <div className="text-slate-700 dark:text-slate-200 text-xl">Lorem, ipsum dolor.</div>
-        </div>
-      </section>
-      {/* <Row style={{marginTop: 50, marginBottom: 50}}>
+      )}
+      <h1 style={{marginTop: 120}}>Pilih Pesanan Anda</h1>
+      <Row style={{marginTop: 50, marginBottom: 50}}>
         {foods.map((food, id) => (
           <Col key={id}>
             <Card border="secondary" style={{ width: '18rem' }}>
@@ -130,7 +116,7 @@ const Home = ({ foods, setUpdated }) => {
             </Card>
           </Col>
         ))}
-      </Row> */}
+      </Row>
       <Row>
         {orderedFoods.length > 0 && (
         <Button variant='warning' onClick={() => setIsShowOrder(prev => !prev)} className='mb-3'>{isShowOrder ? "Sembunyikan Pesanan" : "Tampilkan Pesanan"}</Button>
@@ -162,7 +148,11 @@ const Home = ({ foods, setUpdated }) => {
           </Form>
         )}
       </Row>
-    </div>
+      </>
+      ) :
+      <LoginPage />
+      }
+    </Container>
   )
 }
 
