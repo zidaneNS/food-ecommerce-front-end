@@ -78,7 +78,7 @@ const Home = ({ foods, setUpdated }) => {
     setNote({});
   }
   return (
-    <div className="grid grid-flow-row place-content-center h-screen">
+    <div className="grid grid-flow-row place-content-center h-screen w-1/2">
       {/* {note?.orderInfo?.order && (
       <Modal dialogClassName='modal-70w' show={noteDisplay}>
         <Modal.Header >
